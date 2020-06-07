@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'session#destroy'
+  namespace :admin do
+    resources :users
+  end
+
   get 'users/new'
-  get 'users/create'
-  get 'users/me'
-  get 'sessions/create'
-  get 'sessions/destory'
-  resources :post
+  post 'users/create'
+  get '/home', to: 'users#me'
+  resources :posts
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

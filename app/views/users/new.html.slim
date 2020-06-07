@@ -1,0 +1,16 @@
+h1
+  | Users#me
+
+= render 'shared/error_messages'
+= form_for @user, url: users_create_path do |f|
+  #form-group
+  = f.label :ユーザー名
+  = f.text_field :name
+  #form-group
+  = f.label :パスワード
+  = f.password_field :password
+  #form-group
+  = f.label :パスワード（確認）
+  = f.password_field :password_confirmation
+  #form-group
+  = f.submit '登録', class: "btn btnprimary"
