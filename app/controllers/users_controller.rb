@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :login_required, only: [:new, :create]
+
   def new
     @user = User.new
   end
@@ -9,7 +11,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect_to home_path
     else
-      redirect_to :back, flash: {
+      redirect_back fallback_location: users_new_path, flash: {
         user: user,
         error_messages: user.errors.full_messages
       }
@@ -22,7 +24,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :password, :password_confirmation)
+    params.require(:user).permit(:name,:email, :password, :password_confirmation)
   end
 
 end

@@ -6,8 +6,8 @@ class User < ApplicationRecord
       length: { maximum: 16 }, 
       format: {
           with: /\A[a-z0-9]+\z/,
-          message: 'は小文字で入力してください'
+          message: 'は英数小文字で入力してください'
       }
     validates :email, presence: true
-    validates :password_digest, presence: true, length: { in: 8..16 }
+    validates :password, presence: true, length: { in: 8..16 }
 end
